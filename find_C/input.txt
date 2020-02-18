@@ -1,0 +1,3 @@
+/home/andrea/Projects/SOL/find/find_C/marzo1821.txt
+/home/andrea/Projects/SOL/find/ [r]
+/home/andrea/Projects/SOL/find/find_C/5maggio.txt
