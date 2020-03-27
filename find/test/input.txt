@@ -1,0 +1,3 @@
+/home/andrea/Projects/SOL/find/test/target/5maggio.txt
+/home/andrea/Projects/SOL/find/test/target/marzo1821.txt
+/home/andrea/Projects/SOL/find/tes2/
