@@ -4,11 +4,8 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/sysmacros.h>
-#include <unistd.h>
 #include <string.h>
 #include <errno.h>
-#include <stdbool.h>
 #include "report.h"
 #include "file.h"
 #include "kmp.h"
@@ -26,6 +23,7 @@ struct node
 
 struct node *first = NULL;
 struct node *second = NULL;
+struct Node *nodo;
 
 struct node *addList(struct node *list, char *n)
 {
@@ -97,23 +95,31 @@ int fileInDir(char *path)
     return 0;
 }
 
-void executeAlgorithm(char *path, char *word)
+void executeAlgorithm(char *text, char *word, int position, char *path)
 { //, Match* posizione){
 
+    // struct Match * pos;
     char *shift;
 
-    int n = strlen(path);
+    int n = strlen(text);
     int m = strlen(word);
 
-    shift = KMP(path, word, n, m);
-    if (shift != 0)
-        printf("%s Pattern occurs with shift %d\n", word, shift);
+    shift = KMP(text, word, n, m);
+    if (shift != 0 && position != 0)
+    {
+        printf("Path: %s\n", path);
+        printf("Riga %d Parola '%s' Colonna %d\n", position, word, shift);
+        // //posizione =
+        // pos->RIGA = shift;
+        // pos->COLONNA = position;
+
+        // Node *creaNuovoReport(path, word,  , pos, nodo);
+    }
 }
 
 void Analize(char *file)
 {
-    //const char str2[] = "[r]";
-    int str2 = '[r]';
+    const int str2 = '[r]';
 
     //if (ret != 0) //strchr(file, '[r]')
     // se nell'input immesso e' presente il parametro di ricorsione setta il flag ad 1;
@@ -134,7 +140,7 @@ void Analize(char *file)
 
 void initialize(char *wordFile, char *inputFile)
 {
-    struct node *new_node;
+    struct node *second_node;
 
     if (wordFile == NULL || inputFile == NULL)
     {
@@ -145,28 +151,12 @@ void initialize(char *wordFile, char *inputFile)
     pathExtract(wordFile, 0);
     pathExtract(inputFile, 1);
 
-    // for (new_node = first; new_node != NULL; new_node = new_node->next)
-    // {
-    //     if ((isDirectory(new_node->value)) == 1 || (isRegular(new_node->value) == 1))
-    //     {
-    //         printf("%s\n", new_node->value);
-    //     }
-    //     else if ((new_node->value[0] >= 'a' && new_node->value[0] <= 'z') || (new_node->value[0] >= 'A' && new_node->value[0] <= 'Z'))
-    //     {
-    //         printf("False%s\n", new_node->value);
-    //     }
-    //     else
-    //     {
-    //         continue;
-    //     }
-    // }
-
-    for (new_node = second; new_node != NULL; new_node = new_node->next)
+    for (second_node = second; second_node != NULL; second_node = second_node->next)
     {
-        if ((isDirectory(new_node->value)) == 1 || (isRegular(new_node->value) == 1))
+        if ((isDirectory(second_node->value)) == 1 || (isRegular(second_node->value) == 1))
         {
-            printf("%s\n", new_node->value);
-            Analize(new_node->value);
+            //printf("%s\n", second_node->value);
+            Analize(second_node->value);
         }
         else
         {
@@ -215,11 +205,9 @@ char *pathExtract(char *file, int tmp) //, Node* primoReport) //,char *wordSave[
         char *line = text[numlines - 1];
         while (*c != '\n' && *c != '\0')
         {
-
             if (*c != '\r')
             {
                 *line++ = *c;
-                //position++;
             }
             ++c;
         }
@@ -243,20 +231,21 @@ char *pathExtract(char *file, int tmp) //, Node* primoReport) //,char *wordSave[
             {
                 second = addList(second, text[i]);
             }
-            //if ((text[i][0] >= 'a' && text[i][0] <= 'z') || (text[i][0] >= 'A' && text[i][0] <= 'Z'))
             if ((text[i][0] >= 'a' && text[i][0] <= 'z') || (text[i][0] >= 'A' && text[i][0] <= 'Z'))
             {
                 for (new_node = first; new_node != NULL; new_node = new_node->next)
+                //for (second_node = second; second_node != NULL; second_node = second_node->next)
                 {
-                    txt[i] = strtok(new_node->value, "\r\n");
-                    bubblesort(txt[i]);
-                    executeAlgorithm(text[i], txt[i]);
+                    {
+                        {
+                            txt[i] = strtok(new_node->value, "\r\n");
+                            executeAlgorithm(text[i], txt[i], position, file);
+                        }
+                    }
                 }
                 position++;
-            }    
+            }
         }
-        if (position != 0)
-            printf("%d\n", position);
     }
     free(text);
     return 0;
@@ -266,7 +255,6 @@ char *pathExtract(char *file, int tmp) //, Node* primoReport) //,char *wordSave[
 
 void checkName(char *file)
 {
-
     // Se l'input che viene immesso non e' una directory ma un file esegue la funzione di lettura del file
     // Le funzioni che si occupano di cio' fanno parte delle libc
     if (isDirectory(file) == 0)

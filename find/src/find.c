@@ -13,6 +13,7 @@
 #include "kmp.h"
 
 void printHelp();
+char* outputFile = "find.out" ;
 
 int main(int argc, char *argv[])
 {
@@ -43,9 +44,9 @@ int main(int argc, char *argv[])
       break;
 
     case 'w':
-      w = "test/word.txt";
       // printf("Inserisci Word Path:\n");
       // scanf("%s",&w);
+      w = "test/word.txt";
       break;
 
     case 'o':
@@ -54,8 +55,6 @@ int main(int argc, char *argv[])
       break;
 
     case 'e':
-      //metodo da implementare si occupa dell'esclusione del file con specifiche estensioni
-      
       printf("Quali estensioni escludere? (aggiungere l'estensione con il (.)) \n");
       scanf("%s",&exclude);
       support(&exclude);
@@ -93,10 +92,10 @@ void printHelp()
   printf("\t[words]\n");
   printf("\t\t Word to read\n");
   printf("\t\t -h | -help : print help message \n");
-  printf("\t\t -o <file> | -output <file> : write the result in the <file> (find.out by default)\n");
-  //printf("\t\t -e <file> | -exclude <file> : exclude <file> with specific extension \n");
-  printf("\t\t -r | -report : consider alphabetic characters only \n");
-  printf("\t\t -v <file> | -verbose <file> : write log informations in <file> \n");
-  printf("\t\t\t\t time : file processing time \n");
+  //printf("\t\t -o <file> | -output <file> : write the result in the <file> (find.out by default)\n");
+  printf("\t\t -e <file> | -exclude <file> : exclude <file> with specific extension \n");
+  //printf("\t\t -r | -report : consider alphabetic characters only \n");
+  //printf("\t\t -v <file> | -verbose <file> : write log informations in <file> \n");
+  //printf("\t\t\t\t time : file processing time \n");
   printf("\n");
 }

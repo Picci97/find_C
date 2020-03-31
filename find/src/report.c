@@ -41,21 +41,20 @@ Node *creaNuovoReport(char *filePath, char *word, int *occurrences, Match *posiz
 	return creaNuovoReport;
 }
 
-void sortStrings(char arr[][Max], int n) 
-{ 
-    char temp[Max];
-  
-    // Sorting strings using bubble sort 
-    for (int j=0; j<n-1; j++) 
-    { 
-        for (int i=j+1; i<n; i++) 
-        { 
-            if (strcmp(arr[j], arr[i]) > 0) 
-            { 
-                strcpy(temp, arr[j]); 
-                strcpy(arr[j], arr[i]); 
-                strcpy(arr[i], temp); 
-            } 
-        } 
-    } 
-} 
+void sortStrings(char * names[])
+{
+	char *tmp;
+	int i = 0, j;
+	for (i; names[i]; i++)
+	{
+		for (j = 0; names[j]; j++)
+		{
+			if (strcmp(names[i], names[j]) < 0)
+			{
+				tmp = names[i];
+				names[i] = names[j];
+				names[j] = tmp;
+			}
+		}
+	}
+}
