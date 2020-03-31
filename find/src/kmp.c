@@ -1,17 +1,22 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
 // Function to implement KMP algorithm
-void KMP(const char* X, const char* Y, int m, int n)
+int KMP(const char* X, const char* Y, int m, int n)
 {
+	int * d = NULL;
 	// Base Case 1: Y is NULL or empty
 	if (*Y == '\0' || n == 0)
-		printf("Pattern occurs with shift 0");
+	{
+		//printf("Pattern occurs with shift 0");
+		d = 1;
+	}
+		//
+		//printf("Pattern occurs with shift 0");
 
 	// Base Case 2: X is NULL or X's length is less than that of Y's
-	if (*X == '\0' || n > m)
-		printf("Pattern not found");
+	// if (*X == '\0' || n > m)
+	// 	return d;
+	// 	//printf("Pattern not found");
 
 	// next[i] stores the index of next best partial match
 	int next[n + 1];
@@ -35,11 +40,14 @@ void KMP(const char* X, const char* Y, int m, int n)
 		if (*(X + i) == *(Y + j))
 		{
 			if (++j == n)
-				printf("Pattern occurs with shift %d\n", i - j + 1);
+				d = i - j + 1;
+				
+				//printf("Pattern occurs with shift %d\n", i - j + 1);
 		}
 		else if (j > 0) {
 			j = next[j];
 			i--;	// since i will be incremented in next iteration
 		}
 	}
+	return d;
 }

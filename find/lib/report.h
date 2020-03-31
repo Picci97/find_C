@@ -29,4 +29,6 @@ Match * creaPrimaPosizione();
 
 
 Node * creaPrimoReport();
-Node * creaNuovoReport(char * word, int * occurrences, Match * posizione,char * filePath, Node * primo);
+Node* creaNuovoReport(char* filePath, char* word, int* occurrences, Match* posizione, Node* primo);
+
+void bubblesort(int a[], int n);

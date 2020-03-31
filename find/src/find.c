@@ -16,12 +16,12 @@ void printHelp();
 
 int main(int argc, char *argv[])
 {
-  char *outputFile = "find.out";
+  //char *outputFile = "find.out";
 
-  char *wordFile = "test/word.txt";
-  char *inputFile = "test/input.txt";
+  // char *wordFile = "test/word.txt";
+  // char *inputFile = "test/input.txt";
 
-  char * exclude;
+  char exclude;
   
   char * i;
   char * w;
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
       break;
     case 'r':
       //metodo che si occupa del report del file, da revisionare
-      readReport();
+      //readReport();
       break;
 
     case 'h':
